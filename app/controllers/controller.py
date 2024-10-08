@@ -1,16 +1,22 @@
 from cryptography.fernet import Fernet
 
-# Generate a key
-key = Fernet.generate_key()
-cipher = Fernet(key)
 
 # Encrypt text
 def encrypt_text(plain_text):
-    return cipher.encrypt(plain_text.encode())
+    # Generate a key
+    key = Fernet.generate_key()
+    cipher = Fernet(key)
+
+    data = {
+        "encrypted_text":cipher.encrypt(plain_text.encode()),
+        "key":key
+    }
+    return data
 
 # Decrypt text
-def decrypt_text(encrypted_text):
-    return cipher.decrypt(encrypted_text).decode()
+def decrypt_text(encrypted_text, ktd):
+    f = Fernet(ktd)
+    return f.decrypt(encrypted_text).decode()
 
 # Encrypt file
 def encrypt_file(file_path, key):
