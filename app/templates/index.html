@@ -10,32 +10,134 @@
 </head>
 
 <body>
-    <div class="container mx-auto">
-        <input class="input-btn" type="radio" id="encrypt" name="e2d-radio" checked>
-        <label class="neon-btn" for="encrypt">
-            <span class="span"></span>
-            <span class="txt uppercase">Encrypt</span>
-        </label>
 
-        <input class="input-btn" type="radio" id="decrypt" name="e2d-radio" value="decrypt">
-        <label class="neon-btn" for="decrypt">
-            <span class="span"></span>
-            <span class="txt uppercase">Decrypt</span>
-        </label>
-    </div>
-    <!-- ENCRYPTOR -->
-    <div class="w-[90%] mx-auto">
-        <div>
-            <div class="overflow-hidden">
-                <textarea id="OrderNotes" class="w-full resize-none border-x-0 border-t-0 border-gray-200 px-0 align-top sm:text-sm" rows="4" placeholder="Enter text to encrypt..."></textarea>
-                <div class="flex items-center justify-end gap-2 py-3">
-                    <button type="button" class="rounded bg-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-gray-600">Clear</button>
-                    <button type="button" class="rounded bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700">Add</button>
+    <section class="bg-white">
+        <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+            <section class="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+                <img src="../static/lock.webp"
+                    class="absolute inset-0 h-full w-full object-cover opacity-80 lg:object-bottom" />
+
+                <div class="hidden lg:relative lg:block lg:p-12">
+                    <a class="block text-white w-10">
+                        <svg id="lock" class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path
+                                d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+                                fill="currentColor" />
+                        </svg>
+                        </svg>
+                        <svg id="unlock" class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                            <path
+                                d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80l0 48c0 17.7 14.3 32 32 32s32-14.3 32-32l0-48C576 64.5 511.5 0 432 0S288 64.5 288 144l0 48L64 192c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-32 0 0-48z"
+                                fill="currentColor" />
+                        </svg>
+                    </a>
+
+                    <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">TextLock</h2>
+
+                    <p class="mt-4 leading-relaxed text-white/90">
+                        Lock your text away with TextLock! This intuitive app encrypts your messages, ensuring that only
+                        those you trust can read them. With advanced encryption algorithms, easy to use, hard to crack,
+                        your secrets stay safe from prying eyes.
+                    </p>
                 </div>
-            </div>
+            </section>
+
+            <main
+                class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
+                <div class="max-w-xl lg:max-w-3xl">
+                    <div class="relative -mt-16 block lg:hidden">
+                        <a
+                            class="inline-flex size-16 items-center justify-center rounded-full bg-white text-black p-3 sm:size-20">
+                            <svg id="lockMob" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path
+                                    d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+                                    fill="currentColor" />
+                            </svg>
+                            </svg>
+                            <svg id="unlockMob" class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                <path
+                                    d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80l0 48c0 17.7 14.3 32 32 32s32-14.3 32-32l0-48C576 64.5 511.5 0 432 0S288 64.5 288 144l0 48L64 192c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-32 0 0-48z"
+                                    fill="currentColor"/>
+                            </svg>
+                        </a>
+
+                        <h1 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">TextLock</h1>
+
+                        <p class="mt-4 leading-relaxed text-gray-500">Lock your text away with TextLock! This intuitive
+                            app encrypts your messages, ensuring that only those you trust can read them. Your secrets
+                            stay safe from prying eyes.</p>
+                    </div>
+
+                    <section class="mt-8">
+                        <div class="container mx-auto mb-6  md:mb-12 grid md:flex">
+                            <input class="input-btn" type="radio" id="encryptToggle" name="e2d-radio" checked>
+                            <label class="neon-btn" for="encryptToggle">
+                                <span class="span"></span>
+                                <span class="txt uppercase">Encrypt</span>
+                            </label>
+
+                            <input class="input-btn" type="radio" id="decryptToggle" name="e2d-radio">
+                            <label class="neon-btn" for="decryptToggle">
+                                <span class="span"></span>
+                                <span class="txt uppercase">Decrypt</span>
+                            </label>
+                        </div>
+                        <!-- Encryptor -->
+                        <form id="encryptForm" class="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+                            <textarea id="encryptInput"
+                                class="w-full resize-none border-none align-top pl-2 pt-1 focus:ring-0 sm:text-sm focus:outline-none"
+                                rows="15" placeholder="Enter text to encrypt"></textarea>
+
+                            <div class="flex items-center justify-end gap-2 bg-white p-3">
+                                <button onclick="encryptInput.value = ''" type="button"
+                                    class="rounded bg-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:scale-105">
+                                    Clear
+                                </button>
+
+                                <button type="button" id="encryptBtn" class="rounded bg-black px-3 py-1.5 text-sm font-medium text-white hover:scale-105">
+                                    Encrypt
+                                </button>
+                            </div>
+                        </form>
+                        <!-- Decryptor -->
+                        <form id="decryptForm" class="hidden">
+
+                            <!-- TEXT -->
+                            <label for="decryptor"
+                                class="relative block rounded-md border border-gray-200 shadow-sm mb-3">
+                                <textarea id="decryptor" name="encrypted_value" class="peer border-none w-full bg-transparent placeholder-transparent focus:border-transparent pt-3 px-2 focus:outline-none focus:ring-0" placeholder="Encrypted Text"></textarea>
+
+                                <span class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Encrypted Text</span>
+                            </label>
+
+                            <!-- KEY -->
+                            <label for="decryptKey"
+                                class="relative block rounded-md border border-gray-200 shadow-sm ">
+                                <input type="text" name="key" id="decryptKey"
+                                    class="peer border-none w-full bg-transparent placeholder-transparent focus:border-transparent py-3 px-2 focus:outline-none focus:ring-0" placeholder="Secret Key"/>
+
+                                <span
+                                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                                    Secret Key
+                                </span>
+                            </label>
+                            <div class="flex items-center justify-end gap-2 bg-white p-3">
+                                <button onclick="decryptKey.value = ''; decryptor.value = ''" type="button"
+                                    class="rounded bg-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:scale-105">
+                                    Reset
+                                </button>
+
+                                <button type="button" id="decryptBtn" class="rounded bg-black px-3 py-1.5 text-sm font-medium text-white hover:scale-105">
+                                    Decrypt
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </main>
         </div>
-    </div>
-    <!-- DECRYPTOR -->
+    </section>
+    <script src="../static/script.js"></script>
 </body>
 
 </html>
