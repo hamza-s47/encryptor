@@ -20,8 +20,8 @@ class TextEncryptor(EncryptorData):
         cipher = Fernet(key)
         encrypted_text = cipher.encrypt(text.encode())
         data = {
-            "encrypted_text":encrypted_text,
-            "private_key":key
+            "encrypted_text":encrypted_text.decode(),
+            "private_key":key.decode()
         }
         return data
     
