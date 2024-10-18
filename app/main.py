@@ -9,10 +9,10 @@ def root_route():
     return render_template('index.html')
 
 
-@app.route('/encrypt', methods=['POST'])
+@app.route('/api/encrypt', methods=['POST'])
 def enc_route():
     # Get JSON data from the request
-    data = request.get_json()  
+    data = request.get_json()
 
     # Check if the request was successful and if data is not None
     if data is None:

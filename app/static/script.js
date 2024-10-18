@@ -36,7 +36,8 @@ const submitForm = (event) => {
         }
         dataObject['isEncrypt'] = true;
         const payload = JSON.stringify(dataObject);
-        console.warn(payload);
+        apiCall(payload)
+        // console.warn(payload);
     } 
     else if (!decryptForm.classList.contains('hidden')) {
         formData = new FormData(decryptForm);
@@ -45,6 +46,23 @@ const submitForm = (event) => {
         }
         dataObject['isEncrypt'] = false;
         const payload = JSON.stringify(dataObject);
-        console.warn(payload);
+        apiCall(payload)
+        // console.warn(payload);
     }
 };
+
+// API Calling
+async function apiCall(payload) {
+    
+    try {
+        const response = await fetch('/api/encrypt', {
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: payload
+        });
+        dataResponse = await response.json();
+        console.warn(dataResponse);
+    } catch (error) {
+        console.error("Error in API: ", err)
+    }
+}
