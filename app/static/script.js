@@ -53,6 +53,10 @@ const submitForm = (event) => {
 
 // API Calling
 async function apiCall(payload) {
+    showKey = document.querySelector('#showKey');
+    showText = document.querySelector('#showText');
+    dataModal = document.querySelector('#dataModal');
+    notiBell = document.querySelector('.notiBell');
     
     try {
         const response = await fetch('/api/encrypt', {
@@ -61,8 +65,15 @@ async function apiCall(payload) {
             body: payload
         });
         dataResponse = await response.json();
-        console.warn(dataResponse);
+        isData = true;
+        if(dataResponse.data.secret_key == undefined){
+            showKey.classList.add('hidden')
+        }
+        showKey.innerHTML = `<strong class="underline">Secret Key:</strong><br/> ${dataResponse.data.secret_key}`;
+        showText.innerHTML = `<strong class="underline">Your Message:</strong><br/> ${dataResponse.data.text}`;
+        dataModal.classList.remove('hidden');
+        
     } catch (error) {
-        console.error("Error in API: ", err)
+        console.error("Error in API: ", error);
     }
 }

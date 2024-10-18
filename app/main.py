@@ -30,11 +30,11 @@ def enc_route():
     else:
         enc_text = data.get('encryptedText')
         key = data.get('key')
-        decrypted_text = TextEncryptor().decrypt_text(str.encode(enc_text), str.encode(key))
+        text = TextEncryptor().decrypt_text(str.encode(enc_text), str.encode(key))
         body = {
             "message": "Decrypted successfully",
             "status": 200,
-            "data": decrypted_text
+            "data": { "text": text}
         }
         return jsonify(body)
 
