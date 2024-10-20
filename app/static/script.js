@@ -69,8 +69,8 @@ async function apiCall(payload) {
         if(dataResponse.data.secret_key == undefined){
             showKey.classList.add('hidden')
         }
-        showKey.innerHTML = `<strong class="underline">Secret Key:</strong><br/> ${dataResponse.data.secret_key}`;
-        showText.innerHTML = `<strong class="underline">Your Message:</strong><br/> ${dataResponse.data.text}`;
+        showKey.value = `${dataResponse.data.secret_key}`;
+        showText.value = `${dataResponse.data.text}`;
         dataModal.classList.remove('hidden');
         
     } catch (error) {

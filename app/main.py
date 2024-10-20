@@ -11,10 +11,9 @@ def root_route():
 
 @app.route('/api/encrypt', methods=['POST'])
 def enc_route():
-    # Get JSON data from the request
+
     data = request.get_json()
 
-    # Check if the request was successful and if data is not None
     if data is None:
         return jsonify({"error": "Invalid JSON data"}), 400
 
