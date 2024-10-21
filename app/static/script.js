@@ -2,6 +2,7 @@ const encryptForm = document.querySelector('#encryptForm');
 const decryptForm = document.querySelector('#decryptForm');
 const alertToastr = document.querySelector('#alertToastr');
 const msgToastr = document.querySelector('#msgToastr');
+const mainLoader = document.querySelector('#mainLoader');
 mainData = {}
 
 const btnToggle = () => {
@@ -77,6 +78,8 @@ function copyToClipboard(encrypt){
 
 // API Calling
 async function apiCall(payload) {
+    mainLoader.style.display = 'flex';
+
     showKey = document.querySelector('#showKey');
     isKey = document.querySelector('#isKey');
     showText = document.querySelector('#showText');
@@ -110,8 +113,15 @@ async function apiCall(payload) {
             showText.value = `${dataResponse.data.text}`;
             dataModal.classList.remove('hidden');
         }
+
+        mainLoader.style.display = 'none';
         
     } catch (error) {
         console.error("Error in API: ", error);
+        mainLoader.style.display = 'none';
     }
 }
+
+setTimeout(() => {
+    mainLoader.style.display = 'none';
+}, 1500);
