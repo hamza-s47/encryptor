@@ -60,7 +60,7 @@ function copyToClipboard(encrypt){
     
     try{
         if (encrypt.length >12){
-            navigator.clipboard.writeText(`->Encrypted message: ${mainData.data.text} ->Secret key: ${mainData.data.secret_key}`);
+            navigator.clipboard.writeText(`ENCRYPTED-MESSAGE: ${mainData.data.text} SECRET-KEY: ${mainData.data.secret_key}`);
         } else {
             navigator.clipboard.writeText(mainData.data.text);
         }

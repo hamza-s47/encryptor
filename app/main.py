@@ -1,8 +1,10 @@
 from flask import Flask, render_template, jsonify, request
+from flask_cors import CORS
 from .controllers.controller import TextEncryptor
 
 app = Flask(__name__)
 
+cors = CORS(app, resources={r"/api/*": {"origins":"https://textlok.vercel.app"}})
 
 @app.route('/', methods=['GET'])
 def root_route():
