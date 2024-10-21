@@ -28,6 +28,7 @@ document.querySelectorAll('input[name="e2d-radio"]').forEach(radio => {
 btnToggle();
 
 const submitForm = (event) => {
+    window.scroll(0, 0);
     event.preventDefault();
 
     let formData;
