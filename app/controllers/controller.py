@@ -29,26 +29,26 @@ class TextEncryptor(EncryptorData):
         cipher = Fernet(key)
         return cipher.decrypt(encrypted_text).decode()  
     
-class FileEncryptor(EncryptorData):
+# class FileEncryptor(EncryptorData):
 
-    def encrypt_file(self, file_path):
-        """Encrypt a file."""
-        if self.key is None:
-            raise ValueError("Key is not set. Please generate or provide a key.")
-        cipher = Fernet(self.key)
-        with open(file_path, 'rb') as file:
-            file_data = file.read()
-        encrypted_data = cipher.encrypt(file_data)
-        with open(file_path + '.encrypted', 'wb') as file:
-            file.write(encrypted_data)
+#     def encrypt_file(self, file_path):
+#         """Encrypt a file."""
+#         if self.key is None:
+#             raise ValueError("Key is not set. Please generate or provide a key.")
+#         cipher = Fernet(self.key)
+#         with open(file_path, 'rb') as file:
+#             file_data = file.read()
+#         encrypted_data = cipher.encrypt(file_data)
+#         with open(file_path + '.encrypted', 'wb') as file:
+#             file.write(encrypted_data)
 
-    def decrypt_file(self, encrypted_file_path):
-        """Decrypt a file."""
-        if self.key is None:
-            raise ValueError("Key is not set. Please generate or provide a key.")
-        cipher = Fernet(self.key)
-        with open(encrypted_file_path, 'rb') as file:
-            encrypted_data = file.read()
-        decrypted_data = cipher.decrypt(encrypted_data)
-        with open(encrypted_file_path.replace('.encrypted', ''), 'wb') as file:
-            file.write(decrypted_data)
+#     def decrypt_file(self, encrypted_file_path):
+#         """Decrypt a file."""
+#         if self.key is None:
+#             raise ValueError("Key is not set. Please generate or provide a key.")
+#         cipher = Fernet(self.key)
+#         with open(encrypted_file_path, 'rb') as file:
+#             encrypted_data = file.read()
+#         decrypted_data = cipher.decrypt(encrypted_data)
+#         with open(encrypted_file_path.replace('.encrypted', ''), 'wb') as file:
+#             file.write(decrypted_data)

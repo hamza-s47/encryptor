@@ -16,26 +16,30 @@ def enc_route():
 
     if data is None:
         return jsonify({"error": "Invalid JSON data"}), 400
-
-    if data.get('isEncrypt'):
-        text = data.get('plainText')
-        encrypted_text = TextEncryptor().encrypt_text(text)
-        body = {
-            "message": "Encrypted successfully",
-            "status": 200,
-            "data": encrypted_text
-        }
-        return jsonify(body)
-    else:
-        enc_text = data.get('encryptedText')
-        key = data.get('key')
-        text = TextEncryptor().decrypt_text(str.encode(enc_text), str.encode(key))
-        body = {
-            "message": "Decrypted successfully",
-            "status": 200,
-            "data": { "text": text}
-        }
-        return jsonify(body)
+    
+    try:
+        if data.get('isEncrypt'):
+            text = data.get('plainText')
+            encrypted_text = TextEncryptor().encrypt_text(text)
+            body = {
+                "message": "Encrypted successfully",
+                "status": 200,
+                "data": encrypted_text
+            }
+            return jsonify(body)
+        else:
+            enc_text = data.get('encryptedText')
+            key = data.get('key')
+            text = TextEncryptor().decrypt_text(str.encode(enc_text), str.encode(key))
+            body = {
+                "message": "Decrypted successfully",
+                "status": 200,
+                "data": { "text": text }
+            }
+            return jsonify(body)
+    
+    except Exception as e:
+        return jsonify({"error": "Invalid key or encrypted text", "message":str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

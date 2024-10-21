@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="overflow-x-hidden">
 
     <section class="bg-white">
         <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -72,7 +72,7 @@
                         <!-- Encryptor -->
                         <form id="encryptForm" onsubmit="submitForm(event)"
                             class="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
-                            <textarea id="encryptInput" name="plainText"
+                            <textarea id="encryptInput" name="plainText" required="true"
                                 class="w-full resize-none border-none align-top pl-2 pt-1 focus:ring-0 sm:text-sm focus:outline-none"
                                 rows="12" placeholder="Enter text to encrypt"></textarea>
 
@@ -96,7 +96,7 @@
                             <!-- TEXT -->
                             <label for="decryptor"
                                 class="relative block rounded-md border border-gray-200 shadow-sm mb-3">
-                                <textarea id="decryptor" name="encryptedText"
+                                <textarea id="decryptor" name="encryptedText" required="true"
                                     class="peer border-none w-full bg-transparent placeholder-transparent focus:border-transparent pt-3 px-2 focus:outline-none focus:ring-0"
                                     placeholder="Encrypted Text"></textarea>
 
@@ -107,7 +107,7 @@
 
                             <!-- KEY -->
                             <label for="decryptKey" class="relative block rounded-md border border-gray-200 shadow-sm ">
-                                <input type="text" name="key" id="decryptKey"
+                                <input type="text" name="key" id="decryptKey" required="true"
                                     class="peer border-none w-full bg-transparent placeholder-transparent focus:border-transparent py-3 px-2 focus:outline-none focus:ring-0"
                                     placeholder="Secret Key" />
 
@@ -136,16 +136,21 @@
     <!-- MODAL -->
     <main class="absolute inset-0 w-full h-screen bg-black/70 flex justify-center items-center hidden" id="dataModal">
         <div class="rounded-lg bg-white p-8 shadow-2xl w-[90%] lg:w-[60%] mx-auto">
-            <strong class="underline">Secret Key:</strong><br/>
+            <div class="flex items-center text-xs sm:text-sm md:text-base font-bold mb-4 uppercase">
+                <div class="w-12 md:w-5 text-yellow-400 mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" fill="currentColor"/></svg>
+                </div>
+                <p>If you close this or refresh the browser it will not be recovered!</p>
+            </div>
+            <strong id="isKey" class="underline">Secret Key:<br /></strong>
             <input type="text" id="showKey" class="w-full bg-gray-200 rounded p-3 mb-4 mt-1 focus:outline-black">
-            <!-- <h2 class="text-lg font-bold text-wrap" id="showKey"></h2> -->
 
-            <strong class="underline">Your Text:</strong><br/>
+            <strong class="underline">Your Text:</strong><br />
             <input type="text" id="showText" class="w-full bg-gray-200 rounded p-3 mt-1 focus:outline-black">
-            <!-- <p class="mt-2 text-sm text-gray-500 bg-green-400" id="showText"></p> -->
 
             <div class="mt-4 flex gap-2">
-                <button type="button" class="rounded bg-black px-4 py-2 text-sm font-medium text-white">
+                <button onclick="copyToClipboard(showKey.value)" type="button" class="rounded bg-black px-4 py-2 text-sm font-medium text-white">
                     Copy to clipboard
                 </button>
 
@@ -157,7 +162,23 @@
         </div>
     </main>
     <!-- TOASTR -->
-     
+    <div id="alertToastr" class="absolute -right-96 top-4 max-w-xs lg:max-w-auto text-sm rounded-lg transition-all duration-500">
+        <div class="flex items-center p-4 text-white">
+            <span id="msgToastr" class="text-white font bold"></span>
+            <div class="ms-auto" onclick="alertToastr.style.right = '-100%'">
+                <button type="button"
+                    class="inline-flex shrink-0 justify-center items-center size-5 rounded-lg text-red-800 opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100">
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="../static/script.js"></script>
 </body>
 

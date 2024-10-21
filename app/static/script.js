@@ -1,5 +1,8 @@
 const encryptForm = document.querySelector('#encryptForm');
 const decryptForm = document.querySelector('#decryptForm');
+const alertToastr = document.querySelector('#alertToastr');
+const msgToastr = document.querySelector('#msgToastr');
+mainData = {}
 
 const btnToggle = () => {
     const encryptToggle = document.querySelector('#encryptToggle');
@@ -51,12 +54,34 @@ const submitForm = (event) => {
     }
 };
 
+// Copy to Clipboard
+function copyToClipboard(encrypt){
+    
+    try{
+        if (encrypt.length >12){
+            navigator.clipboard.writeText(`->Encrypted message: ${mainData.data.text} ->Secret key: ${mainData.data.secret_key}`);
+        } else {
+            navigator.clipboard.writeText(mainData.data.text);
+        }
+        msgToastr.innerText = "Successfully copied!";
+        alertToastr.style.background = 'green'
+            alertToastr.style.right = '16px';
+
+            setTimeout(() => {
+                alertToastr.style.right = '-100%'
+            }, 6000);
+    } catch (err){
+        console.error("Error in copy", err)
+    } 
+}
+
 // API Calling
 async function apiCall(payload) {
     showKey = document.querySelector('#showKey');
+    isKey = document.querySelector('#isKey');
     showText = document.querySelector('#showText');
     dataModal = document.querySelector('#dataModal');
-    notiBell = document.querySelector('.notiBell');
+    notiBell = document.querySelector('#notiBell');
     
     try {
         const response = await fetch('/api/encrypt', {
@@ -65,13 +90,26 @@ async function apiCall(payload) {
             body: payload
         });
         dataResponse = await response.json();
-        isData = true;
-        if(dataResponse.data.secret_key == undefined){
-            showKey.classList.add('hidden')
+        mainData = dataResponse;
+        // isData = true;
+
+        if (dataResponse.error){
+            msgToastr.innerText = dataResponse.error;
+            alertToastr.style.background = 'red'
+            alertToastr.style.right = '16px';
+
+            setTimeout(() => {
+                alertToastr.style.right = '-100%'
+            }, 6000);
+        } else {
+            if(dataResponse.data.secret_key == undefined){
+                showKey.classList.add('hidden');
+                isKey.classList.add('hidden');
+            }
+            showKey.value = `${dataResponse.data.secret_key}`;
+            showText.value = `${dataResponse.data.text}`;
+            dataModal.classList.remove('hidden');
         }
-        showKey.value = `${dataResponse.data.secret_key}`;
-        showText.value = `${dataResponse.data.text}`;
-        dataModal.classList.remove('hidden');
         
     } catch (error) {
         console.error("Error in API: ", error);
