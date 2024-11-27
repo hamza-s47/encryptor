@@ -4,7 +4,7 @@ from .controllers.controller import TextEncryptor
 
 app = Flask(__name__)
 
-cors = CORS(app, resources={r"/api/*": {"origins":["https://textlok.vercel.app", "http://localhost:1357/"]}})
+cors = CORS(app, resources={r"/api/*": {"origins":["https://textlok.vercel.app", "http://localhost:1357"]}})
 
 @app.route('/', methods=['GET'])
 def root_route():
